@@ -1,0 +1,593 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pizza Order Form (Assignment 6</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jumbotron-narrow.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link rel="icon" href="fonts/favicon.ico">
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="index.html">About</a></li>
+            <li role="presentation"><a href="index.html">Contact</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Online Pizza Ordering</h3>
+      </div>
+<div class="jumbotron">
+
+<form action="" class="form-horizontal" id="orderForm" name="orderForm" autocomplete="on">
+        <legend>Delivery Location</legend>
+        <div class="form-group">
+  <label for="inputFullName" class="col-sm-2 control-label">Name:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputFullName" placeholder="First & Last">
+  </div>
+</div>
+       <div class="form-group">
+  <label for="inputAddressType" class="col-sm-2 control-label">Address Type:</label>
+  <div class="col-sm-10">
+<select class="form-control" onblur="yesnoCheck(this);" id="inputAddressType">
+  <option>House</option>
+  <option>Apartment</option>
+  <option>Business</option>
+  <option>Campus</option>
+  <option>Hotel</option>
+  <option>Dorm</option>
+  <option value="other">Other</option>
+</select>
+  </div>
+</div>
+<div class="form-group" id="ifOther" style="display: none;">
+  <label for="otherAddressType" class="col-sm-2 control-label">Other Type:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="otherAddressType" placeholder="Other Type of address">
+  </div>
+</div>
+<script>
+    function yesnoCheck(that) {
+        if (that.value == "other") {
+            document.getElementById("ifOther").style.display = "block";
+        } else {
+            document.getElementById("ifOther").style.display = "none";
+        }
+    }
+</script>
+<!-------------->            
+       <div class="form-group">
+  <label for="inputAddress" class="col-sm-2 control-label">Address:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputAddress" placeholder="123 Any Street">
+  </div>
+</div>
+       <div class="form-group">
+  <label for="inputAddressNum" class="col-sm-2 control-label">Suite or Apartment:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputAddressNum" placeholder="Suite, Apartment, Room, etc.">
+  </div>
+</div>
+       <div class="form-group">
+  <label for="inputCity" class="col-sm-2 control-label">City:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputCity" placeholder="Anytown">
+  </div>
+</div>
+       <div class="form-group">
+  <label for="inputState" class="col-sm-2 control-label">State:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputState" placeholder="Alaska">
+  </div>
+</div>
+       <div class="form-group">
+  <label for="inputZipCode" class="col-sm-2 control-label">Zip Code:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputZipCode" placeholder="12345">
+  </div>
+</div>
+       <div class="form-group">
+  <label for="inputTelNumber" class="col-sm-2 control-label">Telephone Number:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputTelNumber" placeholder="123-456-7890">
+  </div>
+</div>
+       <div class="form-group">
+  <label for="inputEmail" class="col-sm-2 control-label">Email:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputEmail" placeholder="something@somewhere.com" onblur="return validateInfo()">
+  </div>
+</div>
+<script>
+function validateInfo(){
+var inputFullName=document.getElementById("inputFullName");
+var inputAddressType=document.getElementById("inputAddressType");
+var inputAddress=document.getElementById("inputAddress");    
+var inputCity=document.getElementById("inputCity");  
+var inputState=document.getElementById("inputState");  
+var inputZipCode=document.getElementById("inputZipCode");   
+var inputTelNumber=document.getElementById("inputTelNumber"); 
+var inputEmail=document.getElementById("inputEmail"); 
+    
+        var letters = /^[A-Za-z]+$/;
+        var telnum = /^(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}$/;
+            if (!inputFullName.value.match(letters)){
+                        window.alert("Name can only contain letter only");
+                        inputFullName.focus();
+                        return false;
+            }
+            if (document.getElementById('inputAddressType')[0].value == 'blank'){
+                        window.alert("Please select an address type");
+                        inputAddressType.focus();
+                        return false;
+            }
+            if (inputAddress.value===""){
+                        window.alert("Please enter something for address");
+                        inputAddress.focus();
+                        return false;
+            }
+            if (inputCity.value===""){
+                        window.alert("Please enter your city");
+                        inputCity.focus();
+                        return false;
+            }
+            if (inputState.value===""){
+                        window.alert("Please enter your state");
+                        inputState.focus();
+                        return false;
+            }
+            if (inputZipCode.value.length!=5  || isNaN(inputZipCode.value)){
+                        alert("Please enter 5 digit only for your zip code");
+                        inputZipCode.focus();
+                        return false;
+            }
+            if (!inputTelNumber.value.match(telnum) && inputTelNumber.value.length!=10 ){
+                        alert("Please enter 10 digit for your telephone");
+                        inputTelNumber.focus();
+                        return false;
+            }
+            if (inputEmail.value.indexOf(".") == -1 || inputEmail.value.indexOf("@")== -1) {
+                        alert("Please include a valid email address");
+                        inputEmail.focus();
+                        return false;
+            }
+}
+</script>
+
+
+        <legend>Build Your Order</legend>
+        <div class="form-group">
+        <label for="doughOptions">Dough Options:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="handTossed" value="HandTossed" onclick="displayoption(this)">Hand Tossed
+        </label>
+        <label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="thinCrust" value="ThinCrust" onclick="displayoption(this)">Thin Crust
+        </label>
+        <label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="newyorkStyle" value="NewYork" onclick="displayoption(this)">New York Style
+        </label>
+        <label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="glutenFree" value="GlutenFree" onclick="displayoption(this)">Gluten Free
+        </label>
+        </div>
+ 
+<script> 
+    function displayoption(optionval) {
+        if (optionval.value == "HandTossed") {
+            document.getElementById("handoption").style.display = 'block';
+            document.getElementById("thinoption").style.display = 'none';           
+            document.getElementById("newyorkoption").style.display = 'none';          
+            document.getElementById("glutenoption").style.display = 'none';  
+            
+        } else if (optionval.value == "ThinCrust") {
+            document.getElementById("thinoption").style.display = 'block';
+            document.getElementById("handoption").style.display = 'none';
+            document.getElementById("newyorkoption").style.display = 'none';          
+            document.getElementById("glutenoption").style.display = 'none';             
+        } else if (optionval.value == "NewYork") {
+            document.getElementById("newyorkoption").style.display = 'block';
+            document.getElementById("handoption").style.display = 'none';
+            document.getElementById("thinoption").style.display = 'none';
+            document.getElementById("glutenoption").style.display = 'none';             
+        } else (optionval.value == "GlutenFree") {
+            document.getElementById("glutenoption").style.display = 'block';
+            document.getElementById("handoption").style.display = 'none';
+            document.getElementById("thinoption").style.display = 'none';           
+            document.getElementById("newyorkoption").style.display = 'none';            
+        }
+    }
+</script>
+    
+<div class="form-group">
+  <label for="handoption" class="col-sm-2 control-label"></label>
+  <div class="col-sm-10">
+<select class="form-control" id="handoption" style="display:none;">
+  <option value="9.99">Small($9.99)</option>
+  <option value="12.99">Medium($12.99)</option>
+  <option value="14.99">Large($14.99)</option>
+</select>
+  </div>
+</div>
+<div class="form-group">
+  <label for="thinoption" class="col-sm-2 control-label"></label>
+  <div class="col-sm-10">
+<select class="form-control" id="thinoption" style="display:none;">
+  <option value="11.99">Medium($11.99)</option>
+  <option value="13.99">Large($13.99)</option>
+</select>
+  </div>
+</div>
+<div class="form-group">
+  <label for="newyorkoption" class="col-sm-2 control-label"></label>
+  <div class="col-sm-10">
+<select class="form-control" id="newyorkoption" style="display:none;">
+  <option value="16.99">Large($16.99)</option>
+  <option value="19.99">Extra Lage($19.99)</option>
+</select>
+  </div>
+</div>
+<div class="form-group">
+  <label for="glutenoption" class="col-sm-2 control-label"></label>
+  <div class="col-sm-10">
+<select class="form-control" id="glutenoption" style="display:none;">
+  <option value="10.99">Small($10.99)</option>
+</select>
+  </div>
+</div>
+
+
+
+
+<div class="form-group">
+  <label for="cheeseOptions" class="col-sm-2 control-label">Cheese Options:</label>
+  <div class="col-sm-10">
+<select class="form-control">
+  <option>Light: No charge</option>
+  <option>Normal: No charge</option>
+  <option>Extra: +$2.99</option>
+  <option>Double: +$3.99</option>
+</select>
+  </div>
+</div>
+<div class="form-group">
+  <label for="sauceOptions" class="col-sm-2 control-label">Sauce Options:</label>
+  <div class="col-sm-10">
+<select class="form-control">
+  <option>Regular Tomato: No charge</option>
+  <option>Hearty Tomato: +$.99</option>
+  <option>BBQ Sauce: +$1.99</option>
+</select>
+  </div>
+</div>
+<div class="form-group">
+               <label for="toppingOptions">Topping Options: $.99 each additional topping</label></br>
+<label class="checkbox-inline">
+    <input type="checkbox" name="pepperoni" id="pepperoni">pepperoni
+</label>
+<label class="checkbox-inline">
+ <input type="checkbox" name="sausage" id="sausage">sausage
+</label>
+<label class="checkbox-inline">
+  <input type="checkbox" name="ham" id="ham">ham
+</label>
+<label class="checkbox-inline">
+  <input type="checkbox" name="bacon" id="bacon">bacon
+</label>
+<label class="checkbox-inline">
+  <input type="checkbox" name="salami" id="salami">salami
+</label>
+<label class="checkbox-inline">
+  <input type="checkbox" name="peppers" id="peppers">peppers
+</label>
+<label class="checkbox-inline">
+ <input type="checkbox" name="olives" id="olives">olives
+</label>
+<label class="checkbox-inline">
+  <input type="checkbox" name="jalapenos" id="jalapenos">jalapenos
+</label>
+<label class="checkbox-inline">
+  <input type="checkbox" name="mushrooms" id="mushrooms">mushrooms
+</label>
+<label class="checkbox-inline">
+  <input type="checkbox" name="pineapple" id="pineapple">pineapple
+</label>
+<label class="checkbox-inline">
+  <input type="checkbox" name="onion" id="onion">onion
+</label>
+</div>
+  
+    <legend>Billing Information</legend>
+<div class="form-group" id="billingInfo">
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="sameBillingInfo" id="sameBillingInfo" value="SameAsDelivery" onclick="fillBilling(this.form)">Same as delivery information
+                </label>
+</div>
+<script>
+    function fillBilling(fill) {
+
+        if(fill.sameBillingInfo.checked == true) {
+            fill.sameinputFullName.value = fill.inputFullName.value;
+            fill.sameinputAddressType.value = fill.inputAddressType.value;
+            fill.sameotherAddressType.value = fill.otherAddressType.value;
+            fill.sameinputAddress.value = fill.inputAddress.value;
+            fill.sameinputAddressNum.value = fill.inputAddressNum.value;
+            fill.sameinputCity.value = fill.inputCity.value;
+            fill.sameinputState.value = fill.inputState.value;
+            fill.sameinputZipCode.value = fill.inputZipCode.value;
+            fill.sameinputTelNumber.value = fill.inputTelNumber.value;
+            fill.sameinputEmail.value = fill.inputEmail.value;
+        }
+        if(fill.sameBillingInfo.checked == false) {
+            fill.sameinputFullName.value = '';
+            fill.sameinputAddressType.value = '';
+            fill.sameotherAddressType.value = '';
+            fill.sameinputAddress.value = '';
+            fill.sameinputAddressNum.value = '';
+            fill.sameinputCity.value = '';
+            fill.sameinputState.value = '';
+            fill.sameinputZipCode.value = '';
+            fill.sameinputTelNumber.value = '';
+            fill.sameinputEmail.value = '';
+        }
+    }
+</script>
+<div class="form-group">
+  <label for="sameinputFullName" class="col-sm-2 control-label">Name:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="sameinputFullName" placeholder="First & Last">
+  </div>
+</div>
+<div class="form-group">
+  <label for="inputAddressType" class="col-sm-2 control-label">Address Type:</label>
+  <div class="col-sm-10">
+<select class="form-control" onblur="yesnoCheck2(this);" id="sameinputAddressType">
+  <option>House</option>
+  <option>Apartment</option>
+  <option>Business</option>
+  <option>Campus</option>
+  <option>Hotel</option>
+  <option>Dorm</option>
+  <option value="other2">Other</option>
+</select>
+  </div>
+</div>
+
+<div class="form-group" id="ifOther2" style="display: none;">
+  <label for="otherAddressType" class="col-sm-2 control-label">Other Type:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="sameotherAddressType" placeholder="Type of address">
+  </div>
+</div>
+<script>
+    function yesnoCheck2(that) {
+        if (that.value == "other2") {
+            document.getElementById("ifOther2").style.display = "block";
+        } else {
+            document.getElementById("ifOther2").style.display = "none";
+        }
+    }
+</script>
+<!--------------> 
+      
+       <div class="form-group">
+  <label for="sameinputAddress" class="col-sm-2 control-label">Address:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="sameinputAddress" placeholder="123 Any Street">
+  </div>
+</div>
+       <div class="form-group">
+  <label for="sameinputAddressNum" class="col-sm-2 control-label">Suite or Apartment:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="sameinputAddressNum" placeholder="Suite, Apartment, Room, etc.">
+  </div>
+</div>
+       <div class="form-group">
+  <label for="sameinputCity" class="col-sm-2 control-label">City:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="sameinputCity" placeholder="Anytown">
+  </div>
+</div>
+       <div class="form-group">
+  <label for="sameinputState" class="col-sm-2 control-label">State:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="sameinputState" placeholder="Alaska">
+  </div>
+</div>
+       <div class="form-group">
+  <label for="sameinputZipCode" class="col-sm-2 control-label">Zip Code:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="sameinputZipCode" placeholder="12345">
+  </div>
+</div>
+       <div class="form-group">
+  <label for="inputTelNumber" class="col-sm-2 control-label">Telephone Number:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="sameinputTelNumber" placeholder="123-456-7890">
+  </div>
+</div>
+       <div class="form-group">
+  <label for="sameinputEmail" class="col-sm-2 control-label">Email:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="sameinputEmail" placeholder="something@somewhere.com">
+  </div>
+</div>
+
+<legend>Credit Card Number</legend>
+<div class="form-group">
+  <label for="" class="col-sm-2 control-label">Credit Card #:</label>
+  <div class="col-sm-10"><img id="amex" class="cardtype" src="fonts/amexcard.jpg" style="display: none;"><img id="master" class="cardtype" src="fonts/mastercard.jpg" style="display: none;"><img id="visa" class="cardtype" src="fonts/visacard.jpg" style="display: none;">
+      <input type="text" class="form-control" id="inputCreditNum" placeholder="1111111111111111" name="inputCreditNum" onblur="return validateCardType()">
+  </div>
+</div><img id="amex" class="cardtype" src="fonts/amexcard.jpg" style="display: none;"><img id="master" class="cardtype" src="fonts/mastercard.jpg" style="display: none;"><img id="visa" class="cardtype" src="fonts/visacard.jpg" style="display: none;">
+
+<script>
+function validateCardType() {
+    var inputCreditNum = parseInt(document.getElementById('inputCreditNum').value)
+    var cardtype = {
+        visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
+        mastercard: /^5[1-5][0-9]{14}$/,
+        amex: /^3[47][0-9]{13}$/
+    };
+    if (cardtype.visa.test(inputCreditNum)) {
+        document.getElementById('visa').style.display='block';
+        ccCheck();
+        if(!ccCheck(0)){
+            window.alert("your visa card number is invalid ");
+        }
+    } else if (cardtype.mastercard.test(inputCreditNum)) {
+        document.getElementById('master').style.display='block';
+        ccCheck();
+        if(!ccCheck(0)){
+            window.alert("your master card number is invalid ");
+        }        
+    } else if (cardtype.amex.test(inputCreditNum)) {
+        document.getElementById('amex').style.display='block';
+        ccCheck();
+        if(!ccCheck(0)){
+            window.alert("your amex card number is invalid ");
+        }
+    } else {
+        window.alert('You must have enter your triple A member number by mistake, we need your credit card number instead');
+    }
+}
+function ccCheck(inputCreditNum) {       
+    var digit, digits, flag, sum, _i, _len;
+    flag = true;
+    sum = 0;
+    digits = (inputCreditNum + '').split('').reverse();        
+    for (_i = 0, _len = digits.length; _i < _len; _i++) {       
+      digit = digits[_i];      
+      digit = parseInt(digit, 10);          
+      if ((flag = !flag)) {                      
+        digit *= 2;               
+      }
+      if (digit > 9) {               
+        digit -= 9;                    
+      }      
+      sum += digit;          
+    }    
+    return (sum % 10) == 0;
+  };
+</script>
+
+<div class="form-group">
+  <label for="inputCreditcvc" class="col-sm-2 control-label">CVC:</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputCreditcvc" placeholder="1234">
+  </div>
+</div>
+<div class="form-group">
+  <label for="expireMonth" class="col-sm-2 control-label">Expire Month:</label>
+  <div class="col-sm-10">
+<select class="form-control" id="expireMonth">
+	<option value="1">January</option>
+	<option value="2">February</option>
+	<option value="3">March</option>
+	<option value="4">April</option>
+	<option value="5">May</option>
+	<option value="6">June</option>
+	<option value="7">July</option>
+	<option value="8">August</option>
+	<option value="9">September</option>
+	<option value="10">October</option>
+	<option value="11">Nobember</option>
+	<option value="12">December</option>
+</select>
+  </div>
+</div>
+<div class="form-group">
+ <label for="expireYear" class="col-sm-2 control-label">Expire Year:</label>
+  <div class="col-sm-10">
+<select class="form-control" id="expireYear" onblur="return valexpiration()">
+    <option value="2013">2013</option>
+	<option value="2014">2014</option>
+	<option value="2015">2015</option>
+	<option value="2016">2016</option>
+	<option value="2017">2017</option>
+	<option value="2018">2018</option>
+	<option value="2019">2019</option>
+	<option value="2020">2020</option>
+	<option value="2021">2021</option>
+	<option value="2022">2022</option>
+	<option value="2023">2023</option>
+	<option value="2024">2024</option>
+	<option value="2025">2025</option>
+</select>
+  
+  </div>
+</div>
+<!--Expiration check-->
+<script>
+    function valexpiration() {
+    var today, expdate;
+    var cvccheck = /^[0-9]{3,4}$/;
+    var inputCreditcvc=document.getElementById("inputCreditcvc"); 
+    var expireMonth=parseInt(document.getElementById("expireMonth").value);
+    var expireYear=parseInt(document.getElementById("expireYear").value);
+    today = new Date();
+    expdate = new Date();
+    expdate.setFullYear(expireYear, expireMonth, 1);
+    
+    if (expdate < today) {
+       window.alert("Hold on there Marty McFly, you can't go back into the past without your DeLorean");
+       return false;
+    }
+    if (!inputCreditcvc.value.match(cvccheck)){
+                        alert("Please enter 3 or 4 digit only for cvc ");
+                        inputCreditcvc.focus();
+                        return false;
+    }
+};
+</script>
+
+</form>
+        <!--Click Here To Process-->
+        <input type="submit" id="submit">
+</div>
+
+      <div class="row marketing">
+        <div class="col-lg-6">
+          <h4></h4>
+          <p></p>
+
+          <h4></h4>
+          <p></p>
+
+          <h4></h4>
+          <p></p>
+        </div>
+
+        <div class="col-lg-6">
+          <h4></h4>
+          <p></p>
+
+          <h4></h4>
+          <p></p>
+
+          <h4></h4>
+          <p></p>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; Company 2014</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+<!--    <script src="js/script.js"></script>-->
+  </body>
+</html>
